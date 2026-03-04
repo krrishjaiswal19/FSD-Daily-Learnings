@@ -114,3 +114,8 @@ Window Resize Tracker
 - Event listener cleanup prevents memory leak
 - Dependency array controls execution
 - Infinite loop happens due to improper state update
+
+# Passward-Genrator-project
+- usestate
+- usecallback
+- tailwind-css
