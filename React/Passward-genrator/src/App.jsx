@@ -1,36 +1,40 @@
-import {useState, useCallback} from "react";
+import {useState, useCallback, useEffect} from "react";
 
 function App() {
 
   const  [length, setlength] = useState(10);
   const [isNumberAllowed, setIsNumberAllowed] =useState(false);
   const [isCharAllowed, setIsSymbolAllowed] =useState(false);
-  const [passward, setPassward] = useState("");
+  const [password, setPassword] = useState("");
 
-  const passwardGenrator =useCallback(()=>{
+  const passwordGenrator = useCallback(()=>{
     let pass = ""
     let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     if(isNumberAllowed) str += "0123456789"
-    if(isCharAllowed) str += "!@#$%^&*()_+{}[]|:;'<>,.?/"
+    if(isCharAllowed) str += "!@#$%^&*()_+{}[]|:;'<>,.?"
 
-    for(let i=1;i<length;i++){
-      let charIndex = Math.floor(Math.random()*str.length+1)
+    for(let i=0;i<length;i++){
+      let charIndex = Math.floor(Math.random()*str.length)
       pass+=str.charAt(charIndex)
     }
-    setPassward(pass)
+    setPassword(pass)
   }, [length, isNumberAllowed, isCharAllowed])
+
+  useEffect(()=>{
+     passwordGenrator()
+  }, [length, isNumberAllowed, isCharAllowed, passwordGenrator])
 
   return (
     <>
     <div className="w-full max-w-md mx-auto shadow-md rounded-xl my-8 text-orange-400 bg-gray-600 px-4 py-3">
-      <h1 className="text-3xl text-center text-white my-3">Passward Generator</h1>
+      <h1 className="text-3xl text-center text-white my-3">Password Generator</h1>
      <div className="flex rounded-xl shadow-md overflow-hidden ab-4">
       <input 
       type="text"
-      value={passward}
+      value={password}
       className="outline-none w-full py-1 px-3"
-      placeholder="passward"
+      placeholder="password"
       readOnly
       style= {{backgroundColor : "white"}}
       />
@@ -48,8 +52,27 @@ function App() {
           />
           <label htmlFor="">Length: {length}</label>
         </div>
+        <div className="flex items-center gap-x-1">
+        <input 
+        type="checkbox"
+        name=""
+        id="numInput"
+        checked={isNumberAllowed}
+        onChange={()=> {setIsNumberAllowed((prev) => !prev)}}
+        />
+        <label htmlFor="numInput">Numbers</label>
+        </div>
+        <div className="flex items-center gap-x-1">
+        <input
+         type="checkbox"
+         id="charInput"
+         defaultChecked={isCharAllowed}
+         onChange={() => {setIsCharAllowed((prev) => !prev)}}
+        />
+        <label htmlFor="charInput">Characters</label>
+        </div>
+        </div>
       </div>
-    </div>
     </>
   )
 }
