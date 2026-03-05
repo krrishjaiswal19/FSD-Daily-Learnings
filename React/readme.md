@@ -119,3 +119,4 @@ Window Resize Tracker
 - usestate
 - usecallback
 - tailwind-css
+- useEffect 
