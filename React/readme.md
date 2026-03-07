@@ -107,16 +107,15 @@ This project demonstrates how to:
 - Infinite loop issue
 - Dependency mistakes
 
-## Project
-Window Resize Tracker
-
 ## Learnings
 - Event listener cleanup prevents memory leak
 - Dependency array controls execution
 - Infinite loop happens due to improper state update
 
-# Passward-Genrator-project
+# Learn with project
 - usestate
 - usecallback
 - tailwind-css
-- useEffect 
+- useEffect
+- useRef
+- ReactRouterBasic
